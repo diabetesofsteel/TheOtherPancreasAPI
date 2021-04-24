@@ -32,7 +32,11 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'com.github.TheOtherPancreas:TheOtherPancreasAPI:-SNAPSHOT'
+    implementation 'com.github.TheOtherPancreas:TheOtherPancreasCommon:-SNAPSHOT'
+  }
+dependencies {
+   implementation fileTree(dir: 'libs', include: ['*.jar'])
     androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
