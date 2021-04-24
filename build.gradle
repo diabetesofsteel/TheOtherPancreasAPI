@@ -66,6 +66,10 @@ dependencies {
     implementation 'com.github.TheOtherPancreas:TheOtherPancreasAPI:-SNAPSHOT'
     implementation 'com.github.TheOtherPancreas:TheOtherPancreasCommon:-SNAPSHOT'
   }
+TOPTools.requestReadPermission(this);
+TOPTools.requestWritePermission(this);
+TOPTools.requestReadAndWritePermission(this);
+
 dependencies {
    implementation fileTree(dir: 'libs', include: ['*.jar'])
     androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
