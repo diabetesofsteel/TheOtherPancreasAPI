@@ -30,7 +30,38 @@ android {
         }
     }
 }
+public class YourSpecialRoutine extends ThridPartyRoutineAdapter {
 
+    /**
+    * This will be called every 5 minutes when a new CGM reading is received
+    * after TOP has already calculated the dose it plans to deliver. You are
+    * free to update the dose, or leave it unchanged. In this example the basal
+    * dose (commented out) will be whatever TOP decided and the insulin dose will
+    * always be 0.5 units. Assuming the basal, bolus, and carb doses are not above
+    * the user defined Max Insulin Dose, the pump will inject whatever doses
+    * are specified in the LogEntry returned from this method.
+    */
+    @Override
+    LogEntry adjustTreatment(Context context, LogEntry logEntry) {
+      Log.d("GLUCOSE", logEntry.glucose + "mg/Dl");
+      Log.d("INSULIN ON BOARD", logEntry.insulinOnBoard + "u");
+      logEntry.insulinDose = 0.5f;
+      // logEntry.basalDose = 0.1f;
+      return logEntry;
+    }
+}
+<receiver android:name="com.theotherpancreas.api.TopBroadcastReceiver">
+    <intent-filter>
+        <action android:name="com.theotherpancreas.api.ThirdPartyRoutine.onGlucoseReceipt"/>
+        <action android:name="com.theotherpancreas.api.ThirdPartyRoutine.alterSettingsBeforeCalculatingDose"/>
+        <action android:name="com.theotherpancreas.api.ThirdPartyRoutine.alterLogEntryBeforeCalculatingDose"/>
+        <action android:name="com.theotherpancreas.api.ThirdPartyRoutine.adjustTreatment"/>
+        <action android:name="com.theotherpancreas.api.ThirdPartyRoutine.alterLogEntryAfterDoseIsDelivered"/>
+        <action android:name="com.theotherpancreas.api.ThirdPartyRoutine.onTreatmentFinalized"/>
+    </intent-filter>
+    <meta-data android:name="com.theotherpancreas.api.ThirdPartyRoutine"
+        android:value="com.example.YourSpecialRoutine"/>
+</receiver>
 dependencies {
     implementation 'com.github.TheOtherPancreas:TheOtherPancreasAPI:-SNAPSHOT'
     implementation 'com.github.TheOtherPancreas:TheOtherPancreasCommon:-SNAPSHOT'
