@@ -4,6 +4,12 @@ repositories {
     google()
     mavenCentral()
 }
+allprojects {
+    repositories {
+      ...
+      maven { url 'https://jitpack.io' }
+    }
+  }
 
 android {
     compileSdkVersion 27
