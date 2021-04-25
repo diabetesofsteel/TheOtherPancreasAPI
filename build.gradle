@@ -3,13 +3,8 @@ apply plugin: 'com.android.library'
 repositories {
     google()
     mavenCentral()
+    maven { url 'https://jitpack.io' }
 }
-allprojects {
-    repositories {
-      ...
-      maven { url 'https://jitpack.io' }
-    }
-  }
 
 android {
     compileSdkVersion 27
@@ -30,6 +25,7 @@ android {
         }
     }
 }
+extends com.theotherpancreas.api.ThirdPartyRoutineAdapter
 public class YourSpecialRoutine extends ThridPartyRoutineAdapter {
 
     /**
@@ -62,15 +58,14 @@ public class YourSpecialRoutine extends ThridPartyRoutineAdapter {
     <meta-data android:name="com.theotherpancreas.api.ThirdPartyRoutine"
         android:value="com.example.YourSpecialRoutine"/>
 </receiver>
-dependencies {
-    implementation 'com.github.TheOtherPancreas:TheOtherPancreasAPI:-SNAPSHOT'
-    implementation 'com.github.TheOtherPancreas:TheOtherPancreasCommon:-SNAPSHOT'
-  }
+
 TOPTools.requestReadPermission(this);
 TOPTools.requestWritePermission(this);
 TOPTools.requestReadAndWritePermission(this);
 
 dependencies {
+   implementation 'com.github.TheOtherPancreas:TheOtherPancreasAPI:-SNAPSHOT'
+   implementation 'com.github.TheOtherPancreas:TheOtherPancreasCommon:-SNAPSHOT'
    implementation fileTree(dir: 'libs', include: ['*.jar'])
     androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
